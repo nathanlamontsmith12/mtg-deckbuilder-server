@@ -4,31 +4,12 @@
 
 This app is powered by the excellent [Magic the Gathering API](https://docs.magicthegathering.io/) maintained by Andrew Backes. 
 
-For information regarding the frontend (React), visit [this github page](https://github.com/)
+For information regarding the frontend (React), visit [this github page](https://github.com/nathanlamontsmith12/mtg-deckbuilder-react-app)
 
 
-## User Story 
+## User Story & Wireframes
 
-### Does Not Require Account  
-* User can search the MTG database by card name as well as set, cardtype, and format. These results can then be filtered by color and converted mana cost. (Does not require log in)
-* User can view details on any card result. (Does not require log in)
-
-### Requires Account 
-* User can save cards to their personal card pool 
-* User can view and sort cards in their card pool 
-* User can add notes and pre-set card tags to their cards 
-* User can create groups of cards called "decks"
-* User has full CRUD on their decks 
-* User can add cards to and remove cards from their decks 
-* User can add notes and pre-set deck tags to their decks 
-* User can remove cards from their card pool (which will also remove the card from any of the user's decks that contain it) 
-
-
-## Wireframes 
-
-Also available in the "wireframes" directory.
-
-[Overview](docs/wireframes/00-birds-eye.png)
+For the user story and wireframes, see the github page for the [frontend react app](https://github.com/nathanlamontsmith12/mtg-deckbuilder-react-app). The wireframes can also be found in the wireframes directory included in this repository. 
 
 
 ## Models 
