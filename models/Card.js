@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 
 const cardSchema = mongoose.Schema({
-	data: {type: Object, required: true} 
+	data: {type: Object, required: true}, 
 	ctags: [String], // * 
-	ownerId: {type: String, required: true} // **
+	ownerId: {type: String, required: true}, // **
 	decks: [{deckId: String, copies: Number}],
-	fave: {type: Boolean, default: false}
+	fave: {type: Boolean, default: false},
 	hide: {type: Boolean, default: false}
 })
 

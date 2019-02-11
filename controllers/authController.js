@@ -16,6 +16,7 @@ const Deck = require("../models/Deck");
 // test: 
 router.get("/", async (req, res) => {
 	try {
+		console.log("Auth", req.session);
 		res.send("Authentication Route /auth is working")
 	} catch (err) {
 		console.log(err);

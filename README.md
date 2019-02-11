@@ -33,12 +33,12 @@ Notes:
 
 ### Card 
 ```
-data: {type: Object, required: true} 
+data: {type: Object, required: true}, 
 ctags: [String], // * 
-ownerId: {type: String, required: true} // **
+ownerId: {type: String, required: true}, // **
 decks: [{deckId: String, copies: Number}],
-fave: {type: Boolean, default: false}
-hide: {type: Boolean, default: false}
+fave: {type: Boolean, default: false},
+hide: {type: Boolean, default: false},
 ```
 Notes: 
 ```
@@ -48,12 +48,13 @@ Notes:
 
 ### Deck
 ```
-name: {type: String, required: true}
-ownerId: {type: String, required: true}
+name: {type: String, required: true},
+ownerId: {type: String, required: true},
 description_short: String,
 description_long: String,
 dtags: [String], // *
-cards: [{Card.schema, copies: Number}],
+cards: [Card.schema],
+copies: [{cardId: String, copies: Number}]
 ```
 Notes:
 ```

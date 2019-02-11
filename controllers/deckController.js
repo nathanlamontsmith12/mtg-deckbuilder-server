@@ -14,6 +14,7 @@ const Deck = require("../models/Deck");
 // test: 
 router.get("/", async (req, res) => {
 	try {
+		console.log("Deck", req.session);
 		res.send("Deck Route /deck is working")
 	} catch (err) {
 		console.log(err);
