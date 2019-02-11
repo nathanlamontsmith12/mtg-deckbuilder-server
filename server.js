@@ -11,6 +11,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const cors = require("cors");
 
 
 // ===== SET APP ===== 
@@ -29,14 +30,27 @@ app.use(session({
 }))
 
 
-// ===== "EARLY" MIDDLEWARE ===== 
+// ===== CORS ===== 
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true, 
+  optionsSuccessStatus: 200 
+}
+
+app.use(cors(corsOptions));
+
+
+// ===== OTHER EARLY MIDDLEWARE ===== 
 app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 
 
 // ===== AUTH CONTROLLER & MIDDLEWARE =====
 const authController = require("./controllers/authController");
 app.use("/auth", authController);
+
 
 
 // ===== OTHER CONTROLLERS ===== 
@@ -48,6 +62,10 @@ app.use("/card", cardController);
 
 const deckController = require("./controllers/deckController");
 app.use("/deck", deckController);
+
+const searchController = require("./controllers/searchController");
+app.use("/search", searchController);
+
 
 
 // ===== OTHER MIDDLEWARE ===== 
