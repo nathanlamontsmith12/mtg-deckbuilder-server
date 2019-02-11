@@ -7,8 +7,6 @@ const bcrypt = require("bcryptjs");
 
 // Models
 const User = require("../models/User");
-const Card = require("../models/Card");
-const Deck = require("../models/Deck");
 
 
 // ========== AUTHENTICATION FUNCTIONS ==========

@@ -47,15 +47,13 @@ app.use(bodyParser.json());
 
 
 
-// ===== AUTH CONTROLLER & MIDDLEWARE =====
-const authController = require("./controllers/authController");
-app.use("/auth", authController);
+// ===== USER / AUTHENTICATION CONTROLLER =====
+const userController = require("./controllers/userController");
+app.use("/user", userController);
 
 
 
 // ===== OTHER CONTROLLERS ===== 
-const userController = require("./controllers/userController");
-app.use("/user", userController);
 
 const cardController = require("./controllers/cardController");
 app.use("/card", cardController);
