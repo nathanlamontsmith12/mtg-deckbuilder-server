@@ -11,6 +11,19 @@ const Card = require("../models/Card");
 const Deck = require("../models/Deck");
 
 
+// ========== AUTHENTICATION FUNCTIONS ==========
+
+function logInSession (username) {
+	req.session.loggedIn = true
+	req.session.username = username
+}
+
+function logOutSession () {
+	req.session.destroy();
+	// Other code for log out? 
+}
+
+
 // ========== AUTHENTICATION ROUTES ==========
 
 // test: 
@@ -21,6 +34,23 @@ router.get("/", async (req, res) => {
 	} catch (err) {
 		console.log(err);
 		res.send(err)
+	}
+})
+
+
+// check on user (for Log In: )
+router.post("/", async (req, res)=> {
+	try {
+		// check in DB
+
+		// if ... 
+		logInSession();
+
+		// else ...
+		logOutSession();
+	} catch (err) {
+		console.log(err);
+		res.send(err);
 	}
 })
 

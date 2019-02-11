@@ -25,5 +25,27 @@ router.get("/", async (req, res) => {
 })
 
 
+// create new user account
+router.post("/", async (req, res)=>{
+	try{
+
+		const newUser = await User.create(req.body);
+		console.log(newUser);
+
+		req.session.loggedIn = true
+		req.session.username = req.body.username
+	
+		res.json({
+			status: 200,
+			data: true
+		})
+
+	} catch (err) {
+		console.log(err);
+		res.send(err)
+	}
+})
+
+
 //  ========== EXPORT ROUTER  ==========
 module.exports = router;

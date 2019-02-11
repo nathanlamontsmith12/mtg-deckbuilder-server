@@ -3,14 +3,15 @@ const Card = require("./Card");
 const Deck = require("./Deck");
 
 const userSchema = mongoose.Schema({
-	username: String,
-	password: String,
+	username: {type: String, required: true, unique: true},
+	password: {type: String, required: true},
+	email: {type: String, required: true},
 	cardpool: [Card.schema],
 	decks: [Deck.schema],
 	faveCards: [String],  // * 
 	hiddenCards: [String], // ** 
 	admin: {type: Boolean, default: false},
-	registered: Date
+	registered: {type: Date, required: true}
 })
 
 // * Array of card IDs

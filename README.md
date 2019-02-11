@@ -16,14 +16,15 @@ For the user story and wireframes, see the github page for the [frontend react a
 
 ### User
 ```
-username: String,
-password: String,
+username: {type: String, required: true, unique: true},
+password: {type: String, required: true},
+email: {type: String, required: true},
 cardpool: [Card.schema],
 decks: [Deck.schema],
 faveCards: [String], // * 
 hiddenCards: [String], // ** 
 admin: {type: Boolean, default: false},
-registered: Date
+registered: {type: Date, required: true}
 ```
 Notes: 
 ```
