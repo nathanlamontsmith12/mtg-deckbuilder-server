@@ -21,7 +21,7 @@ password: String,
 cardpool: [Card.schema],
 decks: [Deck.schema],
 faveCards: [String], // * 
-hideCards: [String], // ** 
+hiddenCards: [String], // ** 
 admin: {type: Boolean, default: false},
 registered: Date
 ```
@@ -53,7 +53,7 @@ ownerId: {type: String, required: true}
 description_short: String,
 description_long: String,
 dtags: [String], // *
-cards: [{Cards.schema, copies: Number}],
+cards: [{Card.schema, copies: Number}],
 ```
 Notes:
 ```
