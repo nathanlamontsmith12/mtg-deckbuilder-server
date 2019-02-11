@@ -13,10 +13,12 @@ const User = require("../models/User");
 
 function logInSession (username) {
 	console.log("LOG IN SESSION: ", username);
+	// other code 
 }
 
 function logOutSession () {
 	console.log("LOG OUT SESSION");
+	// other code 
 }
 
 
@@ -24,16 +26,20 @@ function logOutSession () {
 
 // check on user (for Log In: )
 router.post("/login", async (req, res)=> {
-	try {
 
-		console.log(req.body);
+// const password = req.body.password;
+// const hashedPW = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+
+// bcrypt.compareSync(req.body.password, foundUser.password)
+
+	try {
 
 		// check in DB
 		const foundUser = await User.findOne({
 			username: req.body.username
 		})
 
-		if (foundUser.password === req.body.password) {
+		if (bcrypt.compareSync(req.body.password, foundUser.password)) {
 			logInSession(foundUser.username);
 			res.send({
 				status: 200,
@@ -61,8 +67,14 @@ router.post("/login", async (req, res)=> {
 router.post("/", async (req, res)=>{
 	try{
 
-		const newUser = await User.create(req.body);
-		console.log(newUser);
+		const newUser = req.body;
+
+		// HASH that password
+		newUser.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+
+		const createdUser = await User.create(req.body);
+
+		console.log("new user: ", createdUser);
 
 		logInSession(req.body.username);
 	
