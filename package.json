@@ -1,0 +1,30 @@
+{
+  "name": "express-server-mtg-deckbuilder",
+  "version": "1.0.0",
+  "description": "Deckbuilding App for Magic: The Gathering card game",
+  "main": "server.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathanlamontsmith12/mtg-deckbuilder-server.git"
+  },
+  "author": "Nathan Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathanlamontsmith12/mtg-deckbuilder-server/issues"
+  },
+  "homepage": "https://github.com/nathanlamontsmith12/mtg-deckbuilder-server#readme"
+}

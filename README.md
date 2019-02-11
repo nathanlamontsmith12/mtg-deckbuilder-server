@@ -1,4 +1,4 @@
-# Magic The Gathering Deckbuilder 
+# Magic: The Gathering Deckbuilder App (Server)
 
 ## Express Backend
 
