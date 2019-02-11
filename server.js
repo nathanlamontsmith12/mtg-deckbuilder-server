@@ -40,6 +40,9 @@ app.use("/auth", authController);
 
 
 // ===== OTHER CONTROLLERS ===== 
+const userController = require("./controllers/userController");
+app.use("/user", userController);
+
 const cardController = require("./controllers/cardController");
 app.use("/card", cardController);
 
