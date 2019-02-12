@@ -11,8 +11,10 @@ const User = require("../models/User");
 
 // ========== AUTHENTICATION FUNCTIONS ==========
 
-function logInSession (username) {
-	console.log("LOG IN SESSION: ", username);
+function logInSession (username, userId) {
+	console.log("LOG IN SESSION");
+	console.log("username: ", username);
+	console.log("userId: ", userId);
 	// other code 
 }
 
@@ -40,10 +42,10 @@ router.post("/login", async (req, res)=> {
 		})
 
 		if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-			logInSession(foundUser.username);
+			logInSession(foundUser.username, foundUser._id);
 			res.send({
 				status: 200,
-				data: true
+				data: foundUser._id
 			})
 		} else {
 			logOutSession();
@@ -69,18 +71,16 @@ router.post("/", async (req, res)=>{
 
 		const newUser = req.body;
 
-		// HASH that password
+		// hash the password
 		newUser.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
-		const createdUser = await User.create(req.body);
+		const createdUser = await User.create(newUser);
 
-		console.log("new user: ", createdUser);
+		logInSession(createdUser.username, createdUser._id);
 
-		logInSession(req.body.username);
-	
 		res.json({
 			status: 200,
-			data: true
+			data: createdUser._id
 		})
 
 	} catch (err) {
