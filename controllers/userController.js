@@ -63,8 +63,6 @@ router.post("/login", async (req, res)=> {
 })
 
 
-// ========== USER CRUD ROUTES ==========
-
 // create new user account
 router.post("/", async (req, res)=>{
 	try{
@@ -86,6 +84,23 @@ router.post("/", async (req, res)=>{
 	} catch (err) {
 		console.log(err);
 		res.send(err)
+	}
+})
+
+
+// ========== USER ROUTES ==========
+router.post("/info", async (req, res)=>{
+	try {
+
+		console.log("fired, req.body: ", req.body);
+
+		// const foundUser = await User.findById(req.body.userId)
+
+		res.send("Hey")
+
+	} catch (err) {
+		console.log(err);
+		res.send(err);
 	}
 })
 

@@ -36,22 +36,5 @@ router.get("/", async (req, res) => {
 })
 
 
-// check on user (for Log In: )
-router.post("/", async (req, res)=> {
-	try {
-		// check in DB
-
-		// if ... 
-		logInSession();
-
-		// else ...
-		logOutSession();
-	} catch (err) {
-		console.log(err);
-		res.send(err);
-	}
-})
-
-
 //  ========== EXPORT ROUTER  ==========
 module.exports = router;
