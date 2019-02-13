@@ -89,14 +89,18 @@ router.post("/", async (req, res)=>{
 
 
 // ========== USER ROUTES ==========
-router.post("/info", async (req, res)=>{
+
+// Get information: 
+router.get("/:id", async (req, res)=>{
 	try {
 
-		console.log("fired, req.body: ", req.body);
-
+		const foundUser = await User.findById(req.params.id);
 		// const foundUser = await User.findById(req.body.userId)
 
-		res.send("Hey")
+		res.json({
+			status: 200,
+			data: foundUser
+		})
 
 	} catch (err) {
 		console.log(err);
