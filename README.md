@@ -35,16 +35,18 @@ Notes:
 ### Card 
 ```
 data: {type: Object, required: true}, 
-ctags: [String], // * 
-ownerId: {type: String, required: true}, // **
+apid: {type: String, required: true, unique: true}, // *
+ctags: [String], // ** 
+ownerId: {type: String, required: true}, // ***
 decks: [{deckId: String, copies: Number}],
 fave: {type: Boolean, default: false},
 hide: {type: Boolean, default: false},
 ```
 Notes: 
 ```
-// * Array of the tags for cards ("ctags") that a user has added to this card
-// ** ID of the user in whose cardpool this card lives
+// * ID that the API uses in reference to the card 
+// ** Array of the tags for cards ("ctags") that a user has added to this card
+// *** ID of the user in whose cardpool this card lives
 ```
 
 ### Deck
