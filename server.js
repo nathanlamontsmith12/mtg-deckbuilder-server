@@ -32,7 +32,7 @@ app.use(session({
 
 // ===== CORS ===== 
 const corsOptions = {
-  origin: HOST,
+  origin: process.env.HOST,
   credentials: true, 
   optionsSuccessStatus: 200 
 }
