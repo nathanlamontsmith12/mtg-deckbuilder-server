@@ -30,14 +30,12 @@ router.post("/", async (req, res) => {
 			return ({data: card, apid: card.id, ownerId: req.body.userId})
 		})
 
+		const allCards = await Card.find();
 
 		// ONLY add the cards to the Database if those cards are not already in there: 
-		if (allCards.length > 0 ) {
+		let cardsToAddDB = cardsInput;
 
-			const allCards = await Card.find();
-
-			let cardsToAddDB = cardsInput;
-
+		if (cardsToAddDB) {
 			const checkCardApidsDB = allCards.map((card) => {
 				return card.apid
 			});
@@ -49,13 +47,9 @@ router.post("/", async (req, res) => {
 					return true 
 				}
 			})			
-		}
 
-
-		if (cardsToAddDB) {
 			const newCards = await Card.create(cardsToAddDB); 
 		}
-
 
 		// find User: 
 		const foundUser = await User.findById(req.body.userId);
