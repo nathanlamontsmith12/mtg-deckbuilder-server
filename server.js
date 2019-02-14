@@ -32,7 +32,7 @@ app.use(session({
 
 // ===== CORS ===== 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: HOST,
   credentials: true, 
   optionsSuccessStatus: 200 
 }
