@@ -30,19 +30,20 @@ router.post("/", async (req, res) => {
 			return ({data: card, apid: card.id, ownerId: req.body.userId})
 		})
 
-		const allCards = await Card.find();
 
-		let cardsToAdd = cardsInput;
-
-
+		// ONLY add the cards to the Database if those cards are not already in there: 
 		if (allCards.length > 0 ) {
 
-			const checkCardApids = allCards.map((card) => {
+			const allCards = await Card.find();
+
+			let cardsToAddDB = cardsInput;
+
+			const checkCardApidsDB = allCards.map((card) => {
 				return card.apid
 			});
 
-			cardsToAdd = cardsInput.filter((card) => {
-				if (checkCardApids.includes(card.apid)) {
+			cardsToAddDB = cardsInput.filter((card) => {
+				if (checkCardApidsDB.includes(card.apid)) {
 					return false
 				} else {
 					return true 
@@ -51,18 +52,38 @@ router.post("/", async (req, res) => {
 		}
 
 
-		if (cardsToAdd) {
-			const newCards = await Card.create(cardsToAdd);
+		if (cardsToAddDB) {
+			const newCards = await Card.create(cardsToAddDB); 
+		}
 
-			const foundUser = await User.findById(req.body.userId);
 
-			newCards.forEach( (card) => {
+		// find User: 
+		const foundUser = await User.findById(req.body.userId);
+
+
+		// Now, add the cards to the User's cardpool -- but only if they aren't there already: 
+		// first, get an array of the APIDs: 
+		const checkCardApidsUser = foundUser.cardpool.map((card)=>{
+			return card.apid
+		})
+
+		const cardsToAddUser = cardsInput.filter((card)=>{
+			if (checkCardApidsUser.includes(card.apid)){
+				return false
+			} else {
+				return true
+			}
+		})
+
+		if (cardsToAddUser) {
+			cardsToAddUser.forEach( (card) => {
 				foundUser.cardpool.push(card);
 			} )
 
-			const updatedUser = await foundUser.save();
+			const updatedUser = await foundUser.save();			
 		}
 
+		// send response: 
 		res.send("OK");
 
 	} catch (err) {
