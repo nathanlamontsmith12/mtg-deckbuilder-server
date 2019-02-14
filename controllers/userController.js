@@ -41,6 +41,10 @@ router.post("/login", async (req, res)=> {
 			username: req.body.username
 		})
 
+		if (!foundUser) {
+			throw Error("No such user in database")
+		}
+
 		if (bcrypt.compareSync(req.body.password, foundUser.password)) {
 			logInSession(foundUser.username, foundUser._id);
 			res.send({

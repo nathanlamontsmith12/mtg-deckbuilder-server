@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const cardSchema = mongoose.Schema({
 	data: {type: Object, required: true},
-	apid: {type: String, required: true, unique: true}, // *
+	apid: {type: String, required: true}, // *
 	ctags: [String], // ** 
 	ownerId: {type: String, required: true}, // ***
 	decks: [{deckId: String, copies: Number}],
