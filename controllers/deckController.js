@@ -23,5 +23,34 @@ router.get("/", async (req, res) => {
 })
 
 
+// create new deck: 
+router.post("/", async (req, res)=>{
+
+	try {
+		const newDeck = {
+			name: req.body.name,
+			ownerId: req.body.userId,
+			description_short: req.body.description_short,
+			description_long: req.body.description_long
+		}
+
+		const createdDeck = await Deck.create(newDeck);
+
+		const foundUser = await User.findById(req.body.userId);
+
+		foundUser.decks.push(createdDeck);
+
+		await foundUser.save()
+
+		res.json({
+			status: 200,
+			data: createdDeck
+		})
+	} catch (err) {
+		console.log(err);
+		res.send(err)
+	}
+})
+
 //  ========== EXPORT ROUTER  ==========
 module.exports = router;
