@@ -64,18 +64,12 @@ router.patch("/edit/:id", async (req, res) => {
 			description_long: req.body.description_long
 		}
 
-		console.log("UPDATE: ", update);
-
 		// update deck in DB: 
 		const updatedDeck = await Deck.findByIdAndUpdate(req.params.id, update, {new: true} );
-
-		console.log("UPDATED DECK: ", updatedDeck);
 
 		// update on User: 
 
 		const foundUser = await User.findById(req.body.userId);
-
-		console.log("FOUND USER: ", foundUser);
 
 		const targetIndex = foundUser.decks.findIndex((deck)=>{
 			if (deck._id.toString() === req.params.id) {
@@ -88,8 +82,6 @@ router.patch("/edit/:id", async (req, res) => {
 		foundUser.decks.splice(targetIndex, 1, updatedDeck);
 
 		const updatedUser = await foundUser.save();
-
-		console.log("UPDATED USER: ", updatedUser);
 
 		res.json({
 			status: 200,
@@ -111,8 +103,6 @@ router.delete("/delete/:id", async (req, res)=>{
 
 		const deletedDeck = await Deck.findByIdAndDelete(deckId);
 
-		console.log("DELETED DECK: ", deletedDeck);
-
 		const foundUser = await User.findById(userId);
 
 		const targetIndex = foundUser.decks.findIndex((deck)=>{
@@ -126,8 +116,6 @@ router.delete("/delete/:id", async (req, res)=>{
 		foundUser.decks.splice(targetIndex, 1);
 
 		const updatedUser = foundUser.save();
-
-		console.log("UPDATED USER: ", updatedUser);
 
 		res.json({
 			status: 200,
