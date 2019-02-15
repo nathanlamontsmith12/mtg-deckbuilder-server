@@ -7,7 +7,7 @@ const deckSchema = mongoose.Schema({
 	description_short: String,
 	description_long: String,
 	dtags: [String], // *
-	cards: [Card.schema],
+	cards: [Object],
 	copies: [{cardId: String, copies: Number}]	
 })
 

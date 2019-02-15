@@ -133,9 +133,8 @@ router.delete("/delete/:id", async (req, res)=>{
 router.put("/", async (req, res)=>{
 	try {
 
-		console.log("APID: ", req.body.apid);
 		// find card: 
-		const foundCard = await Card.find({apid: req.body.apid});
+		const foundCard = await Card.find({apid: req.body.cardApid});
 
 		if (!foundCard) {
 			throw Error("Card Not Found");

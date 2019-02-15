@@ -57,7 +57,7 @@ ownerId: {type: String, required: true},
 description_short: String,
 description_long: String,
 dtags: [String], // *
-cards: [Card.schema],
+cards: [Object],
 copies: [{cardId: String, copies: Number}]
 ```
 Notes:
