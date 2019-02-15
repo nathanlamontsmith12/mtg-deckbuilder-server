@@ -129,6 +129,53 @@ router.delete("/delete/:id", async (req, res)=>{
 })
 
 
+// put (card into) deck: 
+router.put("/", async (req, res)=>{
+	try {
+
+		console.log("APID: ", req.body.apid);
+		// find card: 
+		const foundCard = await Card.find({apid: req.body.apid});
+
+		if (!foundCard) {
+			throw Error("Card Not Found");
+		} 
+
+		// put card into deck and save: 
+		const foundDeck = await Deck.findById(req.body.deckId);
+		foundDeck.cards.push(foundCard);
+		const updatedDeck = await foundDeck.save();
+
+
+		// find this deck in the user and replace it: 
+		const foundUser = await User.findById(req.body.userId);
+		const targetIndex = foundUser.decks.findIndex((deck)=>{
+			if (deck._id.toString() === req.body.deckId) {
+				return true
+			} else {
+				return false
+			}
+		})
+		foundUser.decks.splice(targetIndex, 1, updatedDeck);
+		const updatedUser = await foundUser.save();
+
+		console.log("UPDATED USER: ", updatedUser);
+
+		res.json({
+			status: 200,
+			data: {action: "Put card into deck"}
+		})
+	} catch (err) {
+		console.log(err);
+		res.send(err);
+	}
+})
+
+// { userId: '5c666c832e5ff02ae381bc88',
+//   cardApid: '57f9ac6c-6f0b-5a33-874d-8dcd0e69ae9e',
+//   deckId: '5c6681df63f6672b174a5f96' }
+
+
 //  ========== EXPORT ROUTER  ==========
 module.exports = router;
 
