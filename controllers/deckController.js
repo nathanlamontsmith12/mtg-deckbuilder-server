@@ -102,6 +102,45 @@ router.patch("/edit/:id", async (req, res) => {
 })
 
 
+// delete deck: 
+router.delete("/delete/:id", async (req, res)=>{
+	try {
+
+		const userId = req.body.userId;
+		const deckId = req.params.id;
+
+		const deletedDeck = await Deck.findByIdAndDelete(deckId);
+
+		console.log("DELETED DECK: ", deletedDeck);
+
+		const foundUser = await User.findById(userId);
+
+		const targetIndex = foundUser.decks.findIndex((deck)=>{
+			if (deck._id.toString() === deckId) {
+				return true
+			} else {
+				return false
+			}
+		})
+
+		foundUser.decks.splice(targetIndex, 1);
+
+		const updatedUser = foundUser.save();
+
+		console.log("UPDATED USER: ", updatedUser);
+
+		res.json({
+			status: 200,
+			data: {action: "Destroyed Deck"}
+		})
+
+	} catch (err) {
+		console.log(err);
+		res.send(err);
+	}
+})
+
+
 //  ========== EXPORT ROUTER  ==========
 module.exports = router;
 
